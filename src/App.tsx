@@ -227,24 +227,24 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 flex items-center justify-center p-0 md:p-6 overflow-hidden relative">
+    <div className="h-full bg-slate-950 flex items-center justify-center p-0 md:p-6 overflow-hidden relative">
       {/* Absolute Decorative ambient back spheres */}
       <div className="absolute top-10 left-10 w-96 h-96 bg-purple-600/10 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-indigo-600/10 rounded-full blur-[140px] pointer-events-none" />
 
       {/* Floating device wrapper mock frame on tablet/desktop displays */}
-      <div className="w-full h-screen md:h-[840px] md:max-w-[410px] md:rounded-[44px] md:border-[10px] md:border-slate-900 bg-slate-950 overflow-hidden shadow-2xl relative flex flex-col transition-all duration-300">
+      <div className="w-full h-full md:h-[840px] md:max-w-[410px] md:rounded-[44px] md:border-[10px] md:border-slate-900 bg-slate-950 overflow-hidden shadow-2xl relative flex flex-col transition-all duration-300">
         
         {/* Dynamic Island / Time status bar on desktop device screens */}
         <div className="hidden md:flex bg-slate-950 h-10 px-6 justify-between items-center text-white text-[11px] font-mono select-none z-50 border-b border-slate-900/10 shrink-0">
           <span className="font-bold">04:27 AM</span>
           <div className="w-[110px] h-6 rounded-full bg-slate-900 flex items-center justify-center border border-slate-800">
-            <div className="w-2.5 h-2.5 rounded-full bg-indigo-505 animate-pulse mr-1" />
+            <div className="w-2.5 h-2.5 rounded-full bg-indigo-500 animate-pulse mr-1" />
             <span className="text-[8px] tracking-wider text-slate-400">CreatorFlow.ai</span>
           </div>
           <div className="flex items-center gap-1.5 text-slate-400">
             <Wifi className="w-3.5 h-3.5" />
-            <BatteryMedium className="w-4 h-4 text-slate-350" />
+            <BatteryMedium className="w-4 h-4 text-slate-400" />
           </div>
         </div>
 
@@ -343,12 +343,12 @@ export default function App() {
 
           {/* Core bottom navigation rail (visible only when logged in) */}
           {isLoggedIn && (
-            <div className="absolute bottom-0 inset-x-0 h-18 bg-slate-950/85 backdrop-blur-xl border-t border-slate-900 flex items-center justify-around px-3 z-40 select-none">
+            <div className="absolute bottom-0 inset-x-0 h-[72px] bg-slate-950/85 backdrop-blur-xl border-t border-slate-900 flex items-center justify-around px-3 z-40 select-none">
               
               <button
                 onClick={() => navigateToScreen(Screen.DASHBOARD)}
                 className={`flex flex-col items-center justify-center p-2 rounded-xl transition cursor-pointer ${
-                  activeTab === "home" ? "text-indigo-400" : "text-slate-505 hover:text-white"
+                  activeTab === "home" ? "text-indigo-400" : "text-slate-500 hover:text-white"
                 }`}
               >
                 <Home className="w-5 h-5" />
@@ -358,7 +358,7 @@ export default function App() {
               <button
                 onClick={() => navigateToScreen(Screen.PLANNER)}
                 className={`flex flex-col items-center justify-center p-2 rounded-xl transition cursor-pointer ${
-                  activeTab === "planner" ? "text-indigo-400" : "text-slate-505 hover:text-white"
+                  activeTab === "planner" ? "text-indigo-400" : "text-slate-500 hover:text-white"
                 }`}
               >
                 <Calendar className="w-5 h-5" />
@@ -368,7 +368,7 @@ export default function App() {
               <button
                 onClick={() => navigateToScreen(Screen.ANALYTICS)}
                 className={`flex flex-col items-center justify-center p-2 rounded-xl transition cursor-pointer ${
-                  activeTab === "analytics" ? "text-indigo-400" : "text-slate-505 hover:text-white"
+                  activeTab === "analytics" ? "text-indigo-400" : "text-slate-500 hover:text-white"
                 }`}
               >
                 <LineChart className="w-5 h-5" />
@@ -378,7 +378,7 @@ export default function App() {
               <button
                 onClick={() => navigateToScreen(Screen.PROFILE)}
                 className={`flex flex-col items-center justify-center p-2 rounded-xl transition cursor-pointer ${
-                  activeTab === "profile" ? "text-indigo-400" : "text-slate-505 hover:text-white"
+                  activeTab === "profile" ? "text-indigo-400" : "text-slate-500 hover:text-white"
                 }`}
               >
                 <User className="w-5 h-5" />
@@ -442,7 +442,7 @@ export default function App() {
                     const fullCopy = `${c.hook}\n\n${c.text}\n\n${c.hashtags.join(" ")}`;
                     return (
                       <div key={cIdx} className="bg-slate-950 p-4 border border-slate-850 rounded-2xl space-y-3 relative">
-                        <div className="p-3 bg-indigo-500/10 border border-indigo-505/20 rounded-xl">
+                        <div className="p-3 bg-indigo-500/10 border border-indigo-500/20 rounded-xl">
                           <span className="text-[8px] font-mono uppercase text-indigo-400 block mb-0.5">Caption Hook</span>
                           <p className="text-xs font-bold text-indigo-150">{c.hook}</p>
                         </div>

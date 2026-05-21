@@ -17,7 +17,7 @@ export default function OnboardingScreen({ onComplete }: OnboardingScreenProps) 
       subtitle: "CreatorFlow AI",
       description: "Generate viral social media captions, short-form video scripts, and eye-catching YouTube thumbnail concepts using state-of-the-art Gemini AI technology.",
       badge: "Gemini 3.5 Backed",
-      color: "from-indigo-600/30 via-purple-600/2s to-transparent"
+      color: "from-indigo-600/30 via-purple-600/20 to-transparent"
     },
     {
       icon: <Video className="w-12 h-12 text-cyan-400" />,

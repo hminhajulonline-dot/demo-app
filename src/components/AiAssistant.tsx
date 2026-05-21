@@ -72,7 +72,7 @@ export default function AiAssistant({ userEmail, isOpen, onClose, onAutoDraft }:
       {/* Header Bar */}
       <div className="p-4 bg-slate-905 border-b border-indigo-950/40 rounded-t-3xl flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-indigo-505 to-cyan-405 flex items-center justify-center p-0.5 animate-pulse">
+          <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-indigo-500 to-cyan-400 flex items-center justify-center p-0.5 animate-pulse">
             <Sparkles className="w-3.5 h-3.5 text-white" />
           </div>
           <div>
@@ -155,7 +155,7 @@ export default function AiAssistant({ userEmail, isOpen, onClose, onAutoDraft }:
         <button
           onClick={() => handleSend()}
           disabled={!inputText.trim()}
-          className="p-3 bg-indigo-600 disabled:opacity-50 text-white rounded-xl flex items-center justify-center shrink-0 hover:bg-indigo-505 active:scale-95 duration-150 cursor-pointer"
+          className="p-3 bg-indigo-600 disabled:opacity-50 text-white rounded-xl flex items-center justify-center shrink-0 hover:bg-indigo-500 active:scale-95 duration-150 cursor-pointer"
         >
           <Send className="w-4 h-4" />
         </button>

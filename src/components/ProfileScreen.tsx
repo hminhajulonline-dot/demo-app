@@ -68,7 +68,7 @@ export default function ProfileScreen({
         {/* Upper Profile Info banner details */}
         <div className="bg-slate-900/40 border border-slate-850 p-5 rounded-2xl flex items-center gap-4 relative overflow-hidden">
           {/* Subtle logo vector behind avatar */}
-          <div className="absolute right-[-10%] bottom-[-10%] w-24 h-24 bg-indigo-505/5 rounded-full blur-2xl pointer-events-none" />
+          <div className="absolute right-[-10%] bottom-[-10%] w-24 h-24 bg-indigo-500/5 rounded-full blur-2xl pointer-events-none" />
 
           {/* Glowing Avatar circle */}
           <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-indigo-500 to-cyan-400 flex items-center justify-center p-0.5 shadow-lg shadow-indigo-550/15">
@@ -102,7 +102,7 @@ export default function ProfileScreen({
           </div>
           <button
             onClick={() => onNavigate(Screen.PREMIUM)}
-            className="px-3 py-2 bg-indigo-600 hover:bg-indigo-505 rounded-xl text-[10px] tracking-wide font-mono text-white duration-150 cursor-pointer"
+            className="px-3 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-xl text-[10px] tracking-wide font-mono text-white duration-150 cursor-pointer"
           >
             Manage
           </button>

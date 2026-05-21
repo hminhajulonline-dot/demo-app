@@ -86,7 +86,7 @@ export default function PremiumScreen({ onNavigate, onSubscribeSuccess }: Premiu
         <div className="space-y-4">
           {/* Pro tier card container */}
           <div className="bg-slate-900 border-2 border-indigo-500 rounded-3xl p-6 space-y-5 relative overflow-hidden shadow-xl shadow-indigo-650/10 shadow-[0_4px_30px_rgba(79,70,229,0.08)]">
-            <div className="absolute top-0 right-0 bg-indigo-505 text-white text-[9px] uppercase font-mono tracking-widest px-4 py-1.5 rounded-bl-xl font-bold">
+            <div className="absolute top-0 right-0 bg-indigo-600 text-white text-[9px] uppercase font-mono tracking-widest px-4 py-1.5 rounded-bl-xl font-bold">
               Most Popular
             </div>
 

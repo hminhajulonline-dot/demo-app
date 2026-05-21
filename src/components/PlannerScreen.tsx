@@ -79,7 +79,7 @@ export default function PlannerScreen({ tasks, onToggleTask, onAddTask, onNaviga
         </div>
         <button
           onClick={() => setShowAddForm(!showAddForm)}
-          className="p-2 rounded-xl bg-indigo-600 hover:bg-indigo-505 flex items-center justify-center cursor-pointer shadow-md shadow-indigo-600/10"
+          className="p-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 flex items-center justify-center cursor-pointer shadow-md shadow-indigo-600/10"
         >
           <Plus className="w-4 h-4 text-white" />
         </button>
