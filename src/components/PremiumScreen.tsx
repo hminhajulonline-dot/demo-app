@@ -31,7 +31,7 @@ export default function PremiumScreen({ onNavigate, onSubscribeSuccess }: Premiu
   return (
     <div className="h-full flex flex-col bg-slate-950 text-white overflow-y-auto pb-24">
       {/* Search Header Bar */}
-      <div className="p-4 bg-slate-905 border-b border-slate-900 flex items-center justify-between">
+      <div className="p-4 bg-slate-900 border-b border-slate-900 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <button
             onClick={() => onNavigate(Screen.DASHBOARD)}
@@ -85,7 +85,7 @@ export default function PremiumScreen({ onNavigate, onSubscribeSuccess }: Premiu
         {/* Pricing Card Deck */}
         <div className="space-y-4">
           {/* Pro tier card container */}
-          <div className="bg-slate-900 border-2 border-indigo-500 rounded-3xl p-6 space-y-5 relative overflow-hidden shadow-xl shadow-indigo-650/10 shadow-[0_4px_30px_rgba(79,70,229,0.08)]">
+          <div className="bg-slate-900 border-2 border-indigo-500 rounded-3xl p-6 space-y-5 relative overflow-hidden shadow-xl shadow-indigo-600/10 shadow-[0_4px_30px_rgba(79,70,229,0.08)]">
             <div className="absolute top-0 right-0 bg-indigo-600 text-white text-[9px] uppercase font-mono tracking-widest px-4 py-1.5 rounded-bl-xl font-bold">
               Most Popular
             </div>
@@ -104,7 +104,7 @@ export default function PremiumScreen({ onNavigate, onSubscribeSuccess }: Premiu
             <button
               onClick={handleSubscribe}
               disabled={subscribed}
-              className="w-full py-4.5 bg-gradient-to-r from-indigo-605 via-indigo-500 to-cyan-500 hover:opacity-90 active:scale-[0.98] transition rounded-2xl text-xs font-extrabold text-white uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full py-4.5 bg-gradient-to-r from-indigo-600 via-indigo-500 to-cyan-500 hover:opacity-90 active:scale-[0.98] transition rounded-2xl text-xs font-extrabold text-white uppercase tracking-wider flex items-center justify-center gap-2 cursor-pointer"
             >
               {subscribed ? (
                 <>
@@ -118,18 +118,18 @@ export default function PremiumScreen({ onNavigate, onSubscribeSuccess }: Premiu
             </button>
 
             {/* Benefits Checklist */}
-            <div className="space-y-3 pt-3 border-t border-slate-850/80">
+            <div className="space-y-3 pt-3 border-t border-slate-800/80">
               {benefits.map((benefit, bIdx) => (
                 <div key={bIdx} className="flex gap-2.5 items-start">
                   <Check className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
-                  <span className="text-xs text-slate-350 font-sans">{benefit}</span>
+                  <span className="text-xs text-slate-300 font-sans">{benefit}</span>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Agency Plan Card */}
-          <div className="bg-slate-905 border border-slate-900 rounded-2xl p-5 space-y-4.5">
+          <div className="bg-slate-900 border border-slate-900 rounded-2xl p-5 space-y-4.5">
             <div className="flex justify-between items-center">
               <div>
                 <span className="text-[10px] font-mono text-slate-400 uppercase tracking-widest font-bold">TEAM AGENCY</span>
@@ -143,7 +143,7 @@ export default function PremiumScreen({ onNavigate, onSubscribeSuccess }: Premiu
             <button
               onClick={handleSubscribe}
               disabled={subscribed}
-              className="w-full py-3 bg-slate-950 border border-slate-800 hover:bg-slate-900 duration-150 rounded-xl text-xs font-semibold text-slate-305 tracking-wide cursor-pointer"
+              className="w-full py-3 bg-slate-950 border border-slate-800 hover:bg-slate-900 duration-150 rounded-xl text-xs font-semibold text-slate-300 tracking-wide cursor-pointer"
             >
               Acquire Enterprise Suite
             </button>

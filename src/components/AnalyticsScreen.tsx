@@ -42,7 +42,7 @@ export default function AnalyticsScreen({ onNavigate }: AnalyticsScreenProps) {
   return (
     <div className="h-full flex flex-col bg-slate-950 text-white overflow-y-auto pb-24">
       {/* Header Bar */}
-      <div className="p-4 bg-slate-905 border-b border-slate-900 flex items-center gap-3">
+      <div className="p-4 bg-slate-900 border-b border-slate-900 flex items-center gap-3">
         <button
           onClick={() => onNavigate(Screen.DASHBOARD)}
           className="p-1.5 rounded-lg hover:bg-slate-900"
@@ -57,7 +57,7 @@ export default function AnalyticsScreen({ onNavigate }: AnalyticsScreenProps) {
 
       <div className="p-5 space-y-6">
         {/* Platform selection filters */}
-        <div className="flex gap-1.5 bg-slate-900/60 border border-slate-850 p-1.5 rounded-2xl">
+        <div className="flex gap-1.5 bg-slate-900/60 border border-slate-800 p-1.5 rounded-2xl">
           {(["YouTube", "Instagram", "TikTok"] as const).map((plat) => {
             const isSelected = plat === activePlatform;
             return (
@@ -67,7 +67,7 @@ export default function AnalyticsScreen({ onNavigate }: AnalyticsScreenProps) {
                 className={`flex-1 text-center py-2 rounded-xl text-xs font-semibold duration-150 cursor-pointer ${
                   isSelected
                     ? "bg-indigo-600 text-white shadow"
-                    : "text-slate-400 hover:text-white hover:bg-slate-850"
+                    : "text-slate-400 hover:text-white hover:bg-slate-800"
                 }`}
               >
                 {plat}
@@ -77,7 +77,7 @@ export default function AnalyticsScreen({ onNavigate }: AnalyticsScreenProps) {
         </div>
 
         {/* Dynamic hand-crafted Area Chart Graph widget using pure responsive SVG */}
-        <div className="bg-slate-900/35 border border-slate-850 p-5 rounded-2xl space-y-3.5 shadow-sm">
+        <div className="bg-slate-900/35 border border-slate-800 p-5 rounded-2xl space-y-3.5 shadow-sm">
           <div className="flex justify-between items-start">
             <div>
               <span className="text-[10px] font-mono uppercase text-slate-500 tracking-wider">Estimated Reach</span>
@@ -158,7 +158,7 @@ export default function AnalyticsScreen({ onNavigate }: AnalyticsScreenProps) {
 
         {/* Analytics performance grid indicators */}
         <div className="grid grid-cols-2 gap-3.5">
-          <div className="p-4 bg-slate-905 border border-slate-900/60 rounded-2xl space-y-1">
+          <div className="p-4 bg-slate-900 border border-slate-900/60 rounded-2xl space-y-1">
             <span className="text-[10px] text-slate-500 font-mono uppercase tracking-wider">Average CTR</span>
             <div className="flex items-baseline gap-1">
               <span className="text-xl font-black">{currentStats.ctr}</span>
@@ -167,7 +167,7 @@ export default function AnalyticsScreen({ onNavigate }: AnalyticsScreenProps) {
             <p className="text-[10px] text-emerald-400">+1.8% vs benchmark</p>
           </div>
 
-          <div className="p-4 bg-slate-905 border border-slate-900/60 rounded-2xl space-y-1">
+          <div className="p-4 bg-slate-900 border border-slate-900/60 rounded-2xl space-y-1">
             <span className="text-[10px] text-slate-500 font-mono uppercase tracking-wider">Retention rate</span>
             <div className="flex items-baseline gap-1">
               <span className="text-xl font-black">{currentStats.retention}</span>
@@ -205,7 +205,7 @@ export default function AnalyticsScreen({ onNavigate }: AnalyticsScreenProps) {
         {/* Weekly Creator Report Card */}
         <div className="space-y-3.5">
           <h4 className="text-xs uppercase font-mono tracking-widest text-slate-400">Weekly Report Card</h4>
-          <div className="p-4 bg-slate-900 border border-slate-850 rounded-2xl flex justify-between items-center cursor-pointer hover:border-slate-700">
+          <div className="p-4 bg-slate-900 border border-slate-800 rounded-2xl flex justify-between items-center cursor-pointer hover:border-slate-700">
             <div className="space-y-1">
               <span className="px-1.5 py-0.5 rounded bg-amber-500/10 border border-amber-500/20 text-[8px] font-mono text-amber-400 tracking-wider font-bold">
                 RECOMMENDED ACTION

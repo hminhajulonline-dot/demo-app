@@ -70,7 +70,7 @@ export default function AiAssistant({ userEmail, isOpen, onClose, onAutoDraft }:
   return (
     <div className="absolute inset-x-0 bottom-0 top-[20%] bg-slate-950 border-t border-slate-900 rounded-t-3xl flex flex-col shadow-[0_-15px_40px_rgba(0,0,0,0.6)] z-50 animate-slideUp">
       {/* Header Bar */}
-      <div className="p-4 bg-slate-905 border-b border-indigo-950/40 rounded-t-3xl flex items-center justify-between">
+      <div className="p-4 bg-slate-900 border-b border-indigo-950/40 rounded-t-3xl flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-indigo-500 to-cyan-400 flex items-center justify-center p-0.5 animate-pulse">
             <Sparkles className="w-3.5 h-3.5 text-white" />
@@ -102,7 +102,7 @@ export default function AiAssistant({ userEmail, isOpen, onClose, onAutoDraft }:
               <div
                 className={`p-3 rounded-2xl text-xs leading-relaxed font-sans ${
                   isModel
-                    ? "bg-slate-900/60 border border-slate-850/80 text-slate-200 rounded-tl-sm"
+                    ? "bg-slate-900/60 border border-slate-800/80 text-slate-200 rounded-tl-sm"
                     : "bg-indigo-600 text-white rounded-tr-sm shadow-md"
                 }`}
               >
@@ -117,7 +117,7 @@ export default function AiAssistant({ userEmail, isOpen, onClose, onAutoDraft }:
                         <button
                           key={pIdx}
                           onClick={() => handleSend(p.text)}
-                          className="w-full text-left p-2 rounded bg-slate-950 border border-slate-850 text-[10px] text-slate-350 hover:bg-slate-900 duration-150 flex items-center justify-between group cursor-pointer"
+                          className="w-full text-left p-2 rounded bg-slate-950 border border-slate-800 text-[10px] text-slate-300 hover:bg-slate-900 duration-150 flex items-center justify-between group cursor-pointer"
                         >
                           <span className="truncate pr-4">{p.text}</span>
                           <CornerDownRight className="w-3 h-3 text-indigo-400 shrink-0 opacity-40 group-hover:opacity-100" />
@@ -132,7 +132,7 @@ export default function AiAssistant({ userEmail, isOpen, onClose, onAutoDraft }:
         })}
 
         {loading && (
-          <div className="self-start flex items-center gap-1.5 p-3 rounded-2xl bg-slate-900/60 border border-slate-850/80 text-xs text-slate-400 italic font-mono">
+          <div className="self-start flex items-center gap-1.5 p-3 rounded-2xl bg-slate-900/60 border border-slate-800/80 text-xs text-slate-400 italic font-mono">
             <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-bounce" />
             <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-bounce delay-75" />
             <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-bounce delay-150" />
@@ -143,14 +143,14 @@ export default function AiAssistant({ userEmail, isOpen, onClose, onAutoDraft }:
       </div>
 
       {/* Input keyboard region */}
-      <div className="p-3 bg-slate-905 border-t border-slate-900 flex gap-2">
+      <div className="p-3 bg-slate-900 border-t border-slate-900 flex gap-2">
         <input
           type="text"
           value={inputText}
           onChange={(e) => setInputText(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleSend()}
           placeholder="Ask Flowy content hacks, edit tags, titles..."
-          className="flex-1 bg-slate-950 border border-slate-850 rounded-xl px-3 py-3 text-xs outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 text-white placeholder-slate-600 font-sans"
+          className="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-3 py-3 text-xs outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 text-white placeholder-slate-600 font-sans"
         />
         <button
           onClick={() => handleSend()}

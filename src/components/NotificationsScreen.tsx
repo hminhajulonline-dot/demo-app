@@ -20,7 +20,7 @@ export default function NotificationsScreen({
   return (
     <div className="h-full flex flex-col bg-slate-950 text-white overflow-y-auto pb-24">
       {/* Header Bar */}
-      <div className="p-4 bg-slate-905 border-b border-slate-900 flex items-center justify-between">
+      <div className="p-4 bg-slate-900 border-b border-slate-900 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <button
             onClick={() => onNavigate(Screen.DASHBOARD)}
@@ -46,7 +46,7 @@ export default function NotificationsScreen({
 
       <div className="p-5 space-y-5">
         {/* Statistics display header */}
-        <div className="flex justify-between items-center bg-slate-900/40 border border-slate-850 p-4 rounded-xl">
+        <div className="flex justify-between items-center bg-slate-900/40 border border-slate-800 p-4 rounded-xl">
           <div className="space-y-1">
             <span className="text-[10px] font-mono uppercase text-slate-400">Unread Signals</span>
             <p className="text-lg font-bold">
@@ -72,7 +72,7 @@ export default function NotificationsScreen({
                 key={notif.id}
                 onClick={() => onMarkRead(notif.id)}
                 className={`p-4 bg-slate-900/50 border rounded-xl flex items-start gap-4 duration-150 cursor-pointer ${
-                  notif.read ? "border-slate-900/60 opacity-60" : "border-slate-850 shadow-[0_4px_20px_rgba(79,70,229,0.05)]"
+                  notif.read ? "border-slate-900/60 opacity-60" : "border-slate-800 shadow-[0_4px_20px_rgba(79,70,229,0.05)]"
                 }`}
               >
                 {/* Visual icon halos based on category */}
@@ -112,7 +112,7 @@ export default function NotificationsScreen({
                       e.stopPropagation();
                       onMarkRead(notif.id);
                     }}
-                    className="p-1.5 rounded-lg bg-slate-950 hover:bg-slate-850 duration-150 text-slate-400 hover:text-white shrink-0 cursor-pointer"
+                    className="p-1.5 rounded-lg bg-slate-950 hover:bg-slate-800 duration-150 text-slate-400 hover:text-white shrink-0 cursor-pointer"
                   >
                     <Check className="w-3.5 h-3.5" />
                   </button>

@@ -81,7 +81,7 @@ export default function CaptionScreen({ initialTopic = "", onNavigate, onSavePro
   return (
     <div className="h-full flex flex-col bg-slate-950 text-white overflow-y-auto pb-24">
       {/* Header Bar */}
-      <div className="p-4 bg-slate-905 border-b border-slate-900 flex items-center gap-3">
+      <div className="p-4 bg-slate-900 border-b border-slate-900 flex items-center gap-3">
         <button
           onClick={() => onNavigate(Screen.DASHBOARD)}
           className="p-1.5 rounded-lg hover:bg-slate-900"
@@ -96,7 +96,7 @@ export default function CaptionScreen({ initialTopic = "", onNavigate, onSavePro
 
       <div className="p-5 space-y-6">
         {/* Input panel */}
-        <div className="bg-slate-900/35 border border-slate-850/80 rounded-2xl p-5 space-y-4">
+        <div className="bg-slate-900/35 border border-slate-800/80 rounded-2xl p-5 space-y-4">
           {/* Main Topic field */}
           <div className="space-y-1.5">
             <label className="text-[10px] uppercase font-mono tracking-wider text-slate-400">Caption Core Theme</label>
@@ -204,7 +204,7 @@ export default function CaptionScreen({ initialTopic = "", onNavigate, onSavePro
               return (
                 <div
                   key={idx}
-                  className="bg-slate-900/50 border border-slate-850 rounded-2xl p-5 shadow-sm space-y-4 relative"
+                  className="bg-slate-900/50 border border-slate-800 rounded-2xl p-5 shadow-sm space-y-4 relative"
                 >
                   {/* Hook segment header */}
                   <div className="p-3.5 bg-indigo-600/10 border border-indigo-500/25 rounded-xl space-y-1">
@@ -225,7 +225,7 @@ export default function CaptionScreen({ initialTopic = "", onNavigate, onSavePro
                   </div>
 
                   {/* Tags list */}
-                  <div className="flex flex-wrap gap-1.5 pt-2 border-t border-slate-850/60">
+                  <div className="flex flex-wrap gap-1.5 pt-2 border-t border-slate-800/60">
                     {c.hashtags?.map((tag: string, tix: number) => (
                       <span
                         key={tix}
@@ -240,7 +240,7 @@ export default function CaptionScreen({ initialTopic = "", onNavigate, onSavePro
                   <div className="flex justify-end pt-1">
                     <button
                       onClick={() => handleCopy(fullText, cId)}
-                      className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-950 border border-slate-800/80 hover:bg-slate-850 active:scale-[0.98] rounded-xl text-[10px] text-slate-300 hover:text-white duration-150 cursor-pointer"
+                      className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-950 border border-slate-800/80 hover:bg-slate-800 active:scale-[0.98] rounded-xl text-[10px] text-slate-300 hover:text-white duration-150 cursor-pointer"
                     >
                       {copiedId === cId ? (
                         <>
