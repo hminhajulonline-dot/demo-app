@@ -18,7 +18,8 @@ import {
   BrainCircuit,
   Flame,
   X,
-  Copy
+  Copy,
+  Globe
 } from "lucide-react";
 
 interface ProfileScreenProps {
@@ -37,6 +38,7 @@ export default function ProfileScreen({
   onSelectProject,
 }: ProfileScreenProps) {
   const [activeFilter, setActiveFilter] = useState<"all" | "caption" | "script" | "thumbnail">("all");
+  const [usaRestriction, setUsaRestriction] = useState(false);
 
   const filteredProjects = savedProjects.filter((p) => {
     if (activeFilter === "all") return true;
@@ -106,6 +108,57 @@ export default function ProfileScreen({
           >
             Manage
           </button>
+        </div>
+
+        {/* Region & Location Restriction Preferences */}
+        <div className="bg-slate-900/40 p-5 border border-slate-850 rounded-2xl space-y-4">
+          <div className="space-y-1">
+            <h4 className="text-xs font-bold text-slate-100 flex items-center gap-1.5">
+              <Globe className="w-3.5 h-3.5 text-indigo-400" /> API Geographic Router
+            </h4>
+            <p className="text-[11px] text-slate-400 leading-normal">
+              Manage platform request proxying modes and bypass localized service limits.
+            </p>
+          </div>
+
+          <div className="flex items-center justify-between py-1 border-t border-slate-850/60 pt-3">
+            <div className="space-y-0.5">
+              <span className="text-xs font-semibold text-slate-200 block">USA Region Restriction</span>
+              <span className="text-[10px] text-slate-500 font-sans block">Limit system API pathways to US nodes only</span>
+            </div>
+            <button
+              id="geo-toggle"
+              onClick={() => {
+                setUsaRestriction(prev => !prev);
+              }}
+              className={`relative inline-flex h-5 w-10 shrink-0 items-center rounded-full transition-colors duration-200 cursor-pointer outline-none ${
+                usaRestriction ? "bg-indigo-600" : "bg-slate-800"
+              }`}
+            >
+              <span
+                className={`inline-block h-3.5 w-3.5 transform rounded-full bg-white transition-transform duration-200 ${
+                  usaRestriction ? "translate-x-[22px]" : "translate-x-[4px]"
+                }`}
+              />
+            </button>
+          </div>
+
+          <div className="flex items-center justify-between border-t border-slate-850/40 pt-3 text-xs font-sans">
+            <span className="text-slate-300">Target Server Region</span>
+            <span className="text-[10px] font-mono font-semibold text-cyan-400 bg-slate-950 px-2 py-1 rounded border border-slate-850">
+              {usaRestriction ? "UNITED STATES (US-EAST)" : "GLOBAL MULTI-REGION (RESTRICTION OFF)"}
+            </span>
+          </div>
+
+          <div className="text-[10px] text-slate-400 font-sans flex items-center gap-1.5 bg-slate-950/60 p-2.5 rounded-lg border border-slate-850/60 leading-normal">
+            <div className={`w-1.5 h-1.5 rounded-full shrink-0 ${usaRestriction ? 'bg-indigo-455' : 'bg-emerald-400 animate-pulse'}`} />
+            <span>
+              {usaRestriction 
+                ? "API calls are restricted to United States. Some non-US features may buffer." 
+                : "Usa location restriction is OFF. You have global access with high speed."
+              }
+            </span>
+          </div>
         </div>
 
         {/* Saved Projects Segment lists */}
