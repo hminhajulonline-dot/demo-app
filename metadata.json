@@ -1,0 +1,6 @@
+{
+  "name": "CreatorFlow AI",
+  "description": "AI-powered mobile workspace for content creators, YouTubers, and social marketers to generate captions, video scripts, thumbnail concepts, and manage posting schedules.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
