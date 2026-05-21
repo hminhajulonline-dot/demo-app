@@ -4,40 +4,69 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script>
-      // Browser Sandbox/iFrame patch:
-      // Prevents "Uncaught TypeError: Cannot set property fetch of #<Window> which has only a getter"
-      // by defining an interceptor or making window.fetch writable in restricted test beds/sandboxes.
+      // 1. Global Error Suppressor to silence restricted sandbox env errors
+      (function() {
+        var suppressPattern = /Cannot set property fetch/i;
+        
+        // Suppress standard runtime script errors
+        window.onerror = function(message, source, lineno, colno, error) {
+          var msg = String(message || "");
+          if (suppressPattern.test(msg)) {
+            console.warn("[Vite/Iframe] Gracefully muted sandbox fetch write error:", msg);
+            return true; // Swallows the error so it doesn't crash the UI
+          }
+        };
+
+        // Suppress unhandled promise rejections
+        window.addEventListener('unhandledrejection', function(event) {
+          var msg = event.reason ? String(event.reason.message || event.reason) : "";
+          if (suppressPattern.test(msg)) {
+            console.warn("[Vite/Iframe] Gracefully muted sandbox fetch write rejection:", msg);
+            event.preventDefault();
+          }
+        });
+      })();
+
+      // 2. Comprehensive fetch property interceptor with getter/setter support
       (function() {
         try {
           var originalFetch = window.fetch;
-          if (originalFetch) {
-            Object.defineProperty(window, 'fetch', {
-              value: originalFetch,
-              writable: true,
-              configurable: true,
-              enumerable: true
-            });
-          }
-        } catch (e) {
-          try {
-            var currentFetch = window.fetch;
-            Object.defineProperty(Object.getPrototypeOf(window), 'fetch', {
-              get: function() { return currentFetch; },
-              set: function(val) { currentFetch = val; },
-              configurable: true,
-              enumerable: true
-            });
-          } catch (err) {
+          if (!originalFetch) return;
+
+          // Helper to register a robust getter/setter on a target object safely
+          function configureFetch(target) {
             try {
-              Object.defineProperty(globalThis, 'fetch', {
-                value: window.fetch,
-                writable: true,
-                configurable: true
+              var desc = Object.getOwnPropertyDescriptor(target, 'fetch');
+              if (desc && !desc.configurable) {
+                return false; // Target is locked, skip to prevent TypeError
+              }
+              
+              var storedFetch = originalFetch;
+              Object.defineProperty(target, 'fetch', {
+                get: function() { return storedFetch; },
+                set: function(val) { 
+                  storedFetch = val; 
+                  console.info("[Vite/Iframe] Intercepted overwrite of fetch:", val);
+                },
+                configurable: true,
+                enumerable: true
               });
-            } catch (gErr) {
-              console.warn("[Vite/Iframe] Could not override fetch property:", gErr);
+              return true;
+            } catch (err) {
+              return false;
             }
           }
+
+          // Apply to window, Window prototype, and globalThis
+          configureFetch(window);
+          if (typeof Window !== 'undefined' && Window.prototype) {
+            configureFetch(Window.prototype);
+          }
+          if (typeof globalThis !== 'undefined') {
+            configureFetch(globalThis);
+          }
+        } catch (e) {
+          console.warn("[Vite/Iframe] Web sandbox fetch definition warning:", e);
         }
       })();
     </script>
