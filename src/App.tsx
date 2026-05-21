@@ -36,11 +36,7 @@ import {
   X,
   Copy,
   FolderOpen,
-  Monitor,
-  Smartphone,
-  LogOut,
-  FileText,
-  Film
+  LogOut
 } from "lucide-react";
 
 export default function App() {
@@ -49,14 +45,22 @@ export default function App() {
   const [lastScreen, setLastScreen] = useState<Screen>(Screen.DASHBOARD);
   const [activeTab, setActiveTab] = useState<"home" | "planner" | "analytics" | "profile">("home");
   const [isPcMode, setIsPcMode] = useState<boolean>(() => {
-    const saved = localStorage.getItem("cf_isPcMode");
-    return saved !== null ? saved === "true" : true;
+    try {
+      const saved = localStorage.getItem("cf_isPcMode");
+      return saved !== null ? saved === "true" : true;
+    } catch {
+      return true;
+    }
   });
 
   const handleTogglePcMode = () => {
     setIsPcMode((prev) => {
       const nextVal = !prev;
-      localStorage.setItem("cf_isPcMode", nextVal.toString());
+      try {
+        localStorage.setItem("cf_isPcMode", nextVal.toString());
+      } catch {
+        /* localStorage unavailable; ignore */
+      }
       return nextVal;
     });
   };
@@ -249,34 +253,36 @@ export default function App() {
       <div className="absolute top-10 left-10 w-96 h-96 bg-purple-600/10 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-indigo-600/10 rounded-full blur-[140px] pointer-events-none" />
 
-      {/* Aesthetic PC vs Mobile Switcher at the top corner of the screen */}
-      <div className="absolute top-4 right-4 z-50 hidden md:flex items-center gap-2 bg-slate-900/80 backdrop-blur-md px-3 py-1.5 rounded-2xl border border-slate-800/80 select-none">
-        <span className="text-[10.5px] font-mono font-semibold text-slate-400 uppercase tracking-wide">Device Layout:</span>
-        <div className="flex bg-slate-950 p-0.5 rounded-lg border border-slate-800">
-          <button
-            id="mobile-layout-btn"
-            onClick={() => { if (isPcMode) handleTogglePcMode(); }}
-            className={`px-3 py-1 text-[9px] font-bold rounded-md cursor-pointer transition-all duration-250 ${
-              !isPcMode 
-                ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/20" 
-                : "text-slate-400 hover:text-white"
-            }`}
-          >
-            📱 Mobile Frame
-          </button>
-          <button
-            id="pc-layout-btn"
-            onClick={() => { if (!isPcMode) handleTogglePcMode(); }}
-            className={`px-3 py-1 text-[9px] font-bold rounded-md cursor-pointer transition-all duration-250 ${
-              isPcMode 
-                ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/20" 
-                : "text-slate-400 hover:text-white"
-            }`}
-          >
-            💻 PC Desktop
-          </button>
+      {/* Aesthetic PC vs Mobile Switcher overlay (only when displaying the narrow mobile frame so it doesn't collide with the PC title bar) */}
+      {!isPcMode && (
+        <div className="absolute top-4 right-4 z-50 hidden md:flex items-center gap-2 bg-slate-900/80 backdrop-blur-md px-3 py-1.5 rounded-2xl border border-slate-800/80 select-none">
+          <span className="text-[10.5px] font-mono font-semibold text-slate-400 uppercase tracking-wide">Device Layout:</span>
+          <div className="flex bg-slate-950 p-0.5 rounded-lg border border-slate-800">
+            <button
+              id="mobile-layout-btn"
+              onClick={() => { if (isPcMode) handleTogglePcMode(); }}
+              className={`px-3 py-1 text-[9px] font-bold rounded-md cursor-pointer transition-all duration-200 ${
+                !isPcMode 
+                  ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/20" 
+                  : "text-slate-400 hover:text-white"
+              }`}
+            >
+              📱 Mobile Frame
+            </button>
+            <button
+              id="pc-layout-btn"
+              onClick={() => { if (!isPcMode) handleTogglePcMode(); }}
+              className={`px-3 py-1 text-[9px] font-bold rounded-md cursor-pointer transition-all duration-200 ${
+                isPcMode 
+                  ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/20" 
+                  : "text-slate-400 hover:text-white"
+              }`}
+            >
+              💻 PC Desktop
+            </button>
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Floating device/workstation wrapper frame */}
       <div className={`w-full h-full bg-slate-950 overflow-hidden shadow-2xl relative flex transition-all duration-300 ${
@@ -312,7 +318,7 @@ export default function App() {
 
               {/* Sidebar Navigation items */}
               <div className="space-y-1">
-                <span className="px-2 pb-1.5 text-[8.5px] uppercase font-mono tracking-wider font-bold text-slate-550 block">NAVIGATION</span>
+                <span className="px-2 pb-1.5 text-[8.5px] uppercase font-mono tracking-wider font-bold text-slate-500 block">NAVIGATION</span>
                 
                 <button
                   id="tab-btn-home"
@@ -381,35 +387,35 @@ export default function App() {
 
               {/* PC Quick AI Tools Panel */}
               <div className="space-y-2 pt-2">
-                <span className="px-2 text-[8.5px] uppercase font-mono tracking-wider font-bold text-slate-550 block">DIRECT TOOLS</span>
+                <span className="px-2 text-[8.5px] uppercase font-mono tracking-wider font-bold text-slate-500 block">DIRECT TOOLS</span>
                 <div className="grid grid-cols-2 gap-1.5 px-1">
                   <button
                     id="tool-caption-btn"
                     onClick={() => navigateToScreen(Screen.CAPTION_GEN)}
-                    className="p-2 rounded-lg bg-slate-900/80 border border-slate-850 hover:border-indigo-500 hover:text-white transition-all text-[9.5px] font-semibold text-slate-300 text-center cursor-pointer"
+                    className="p-2 rounded-lg bg-slate-900/80 border border-slate-800 hover:border-indigo-500 hover:text-white transition-all text-[9.5px] font-semibold text-slate-300 text-center cursor-pointer"
                   >
                     Captions
                   </button>
                   <button
                     id="tool-script-btn"
                     onClick={() => navigateToScreen(Screen.SCRIPT_GEN)}
-                    className="p-2 rounded-lg bg-slate-900/80 border border-slate-850 hover:border-cyan-500 hover:text-white transition-all text-[9.5px] font-semibold text-slate-300 text-center cursor-pointer"
+                    className="p-2 rounded-lg bg-slate-900/80 border border-slate-800 hover:border-cyan-500 hover:text-white transition-all text-[9.5px] font-semibold text-slate-300 text-center cursor-pointer"
                   >
                     Scripts
                   </button>
                   <button
                     id="tool-thumb-btn"
                     onClick={() => navigateToScreen(Screen.THUMBNAIL_GEN)}
-                    className="p-2 rounded-lg bg-slate-900/80 border border-slate-850 hover:border-purple-500 hover:text-white transition-all text-[9.5px] font-semibold text-slate-300 text-center cursor-pointer"
+                    className="p-2 rounded-lg bg-slate-900/80 border border-slate-800 hover:border-purple-500 hover:text-white transition-all text-[9.5px] font-semibold text-slate-300 text-center cursor-pointer"
                   >
                     Thumbs
                   </button>
                   <button
                     id="tool-premium-btn"
                     onClick={() => navigateToScreen(Screen.PREMIUM)}
-                    className="p-2 rounded-lg bg-slate-900/80 border border-slate-850 hover:border-amber-500 hover:text-white transition-all text-[9.5px] font-mono font-bold text-amber-400 text-center cursor-pointer flex items-center justify-center gap-1"
+                    className="p-2 rounded-lg bg-slate-900/80 border border-slate-800 hover:border-amber-500 hover:text-white transition-all text-[9.5px] font-mono font-bold text-amber-400 text-center cursor-pointer flex items-center justify-center gap-1"
                   >
-                    <Zap className="w-2.5 h-2.5 animate-pulse text-amber-450" /> PRO
+                    <Zap className="w-2.5 h-2.5 animate-pulse text-amber-400" /> PRO
                   </button>
                 </div>
               </div>
@@ -420,7 +426,7 @@ export default function App() {
               <button
                 id="sidebar-signout-btn"
                 onClick={handleSignOut}
-                className="w-full flex items-center justify-center gap-2 py-2.5 border border-slate-900 hover:border-rose-950 hover:bg-rose-500/5 hover:text-rose-450 rounded-xl text-xs text-slate-400 transition cursor-pointer"
+                className="w-full flex items-center justify-center gap-2 py-2.5 border border-slate-900 hover:border-rose-950 hover:bg-rose-500/5 hover:text-rose-400 rounded-xl text-xs text-slate-400 transition cursor-pointer"
               >
                 <LogOut className="w-3.5 h-3.5" /> Sign Out
               </button>
@@ -457,7 +463,36 @@ export default function App() {
                 <div className="w-2 h-2 rounded-full bg-amber-500/80 hover:bg-amber-500 transition-all cursor-pointer" />
                 <div className="w-2 h-2 rounded-full bg-emerald-500/80 hover:bg-emerald-500 transition-all cursor-pointer" />
               </div>
-              <span className="text-slate-400 font-semibold font-sans tracking-wide">CREATORFLOW PC DESKTOP WORKSPACE SUITE</span>
+
+              {/* Inline device layout switcher lives inside the PC title bar to avoid overlap with the workstation chrome */}
+              <div className="flex items-center gap-2 select-none">
+                <span className="text-[9px] font-mono font-semibold text-slate-500 uppercase tracking-wide hidden lg:inline">Device Layout:</span>
+                <div className="flex bg-slate-900 p-0.5 rounded-md border border-slate-800">
+                  <button
+                    id="mobile-layout-btn"
+                    onClick={() => { if (isPcMode) handleTogglePcMode(); }}
+                    className={`px-2 py-0.5 text-[9px] font-bold rounded cursor-pointer transition-all duration-200 ${
+                      !isPcMode
+                        ? "bg-indigo-600 text-white"
+                        : "text-slate-400 hover:text-white"
+                    }`}
+                  >
+                    📱 Mobile
+                  </button>
+                  <button
+                    id="pc-layout-btn"
+                    onClick={() => { if (!isPcMode) handleTogglePcMode(); }}
+                    className={`px-2 py-0.5 text-[9px] font-bold rounded cursor-pointer transition-all duration-200 ${
+                      isPcMode
+                        ? "bg-indigo-600 text-white"
+                        : "text-slate-400 hover:text-white"
+                    }`}
+                  >
+                    💻 PC
+                  </button>
+                </div>
+              </div>
+
               <div className="flex items-center gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 <span className="text-slate-500 font-sans text-[9px] uppercase tracking-wider">Cloud Engine Up</span>
@@ -588,7 +623,7 @@ export default function App() {
                 }`}
               >
                 <LineChart className="w-5 h-5" />
-                <span className="text-[9px] font-sans font-semibold mt-1">analytics</span>
+                <span className="text-[9px] font-sans font-semibold mt-1">Analytics</span>
               </button>
 
               <button
@@ -657,12 +692,12 @@ export default function App() {
                   {selectedProject.type === "caption" && selectedProject.content?.captions?.map((c: any, cIdx: number) => {
                     const fullCopy = `${c.hook}\n\n${c.text}\n\n${c.hashtags.join(" ")}`;
                     return (
-                      <div key={cIdx} className="bg-slate-950 p-4 border border-slate-850 rounded-2xl space-y-3 relative">
+                      <div key={cIdx} className="bg-slate-950 p-4 border border-slate-800 rounded-2xl space-y-3 relative">
                         <div className="p-3 bg-indigo-500/10 border border-indigo-500/20 rounded-xl">
                           <span className="text-[8px] font-mono uppercase text-indigo-400 block mb-0.5">Caption Hook</span>
-                          <p className="text-xs font-bold text-indigo-150">{c.hook}</p>
+                          <p className="text-xs font-bold text-indigo-100">{c.hook}</p>
                         </div>
-                        <p className="text-xs text-slate-205 leading-relaxed whitespace-pre-wrap mt-2">{c.text}</p>
+                        <p className="text-xs text-slate-200 leading-relaxed whitespace-pre-wrap mt-2">{c.text}</p>
                         <div className="flex flex-wrap gap-1">
                           {c.hashtags?.map((tag: string, tIdx: number) => (
                             <span key={tIdx} className="px-2 py-0.5 rounded bg-slate-900 text-[10px] text-cyan-400 font-mono">
@@ -693,7 +728,7 @@ export default function App() {
                   {/* Scripts displays */}
                   {selectedProject.type === "script" && selectedProject.content && (
                     <div className="space-y-4">
-                      <div className="p-3 bg-slate-950 border border-slate-850 rounded-xl">
+                      <div className="p-3 bg-slate-950 border border-slate-800 rounded-xl">
                         <span className="text-[8px] font-mono text-cyan-400 block uppercase">Archived Video Title</span>
                         <h4 className="text-xs font-extrabold text-white mt-0.5">{selectedProject.content.title}</h4>
                       </div>
@@ -705,19 +740,19 @@ export default function App() {
 
                       <div className="space-y-3">
                         {selectedProject.content.bodySections?.map((sec: any, sIdx: number) => (
-                          <div key={sIdx} className="bg-slate-950 border border-slate-850 rounded-xl p-3.5 space-y-2.5">
+                          <div key={sIdx} className="bg-slate-950 border border-slate-800 rounded-xl p-3.5 space-y-2.5">
                             <div className="flex justify-between items-center pb-1 border-b border-slate-900">
                               <span className="text-[9px] font-mono font-bold text-slate-400 uppercase">{sec.sectionName}</span>
                             </div>
-                            <div className="p-2 bg-slate-900 rounded border border-slate-850 text-[10px] text-slate-400 italic">
+                            <div className="p-2 bg-slate-900 rounded border border-slate-800 text-[10px] text-slate-400 italic">
                               📹 Visual: {sec.visualCue}
                             </div>
-                            <p className="text-xs text-slate-205 leading-relaxed">🎙️ Audio: {sec.narration}</p>
+                            <p className="text-xs text-slate-200 leading-relaxed">🎙️ Audio: {sec.narration}</p>
                           </div>
                         ))}
                       </div>
 
-                      <div className="p-3 bg-slate-955 rounded-xl text-center">
+                      <div className="p-3 bg-slate-950 rounded-xl text-center">
                         <span className="text-[8.5px] font-mono text-slate-500 block uppercase">Outro Call to Action</span>
                         <p className="text-xs text-slate-300 font-bold mt-0.5">"{selectedProject.content.cta}"</p>
                       </div>
@@ -726,7 +761,7 @@ export default function App() {
 
                   {/* Thumbnail display concepts */}
                   {selectedProject.type === "thumbnail" && selectedProject.content?.ideas?.map((t: any, tIdx: number) => (
-                    <div key={tIdx} className="bg-slate-950 border border-slate-850 rounded-2xl overflow-hidden shadow-sm">
+                    <div key={tIdx} className="bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden shadow-sm">
                       <div className="aspect-video bg-indigo-950/20 p-5 flex flex-col justify-between border-b border-slate-900">
                         <span className="text-[8px] font-mono uppercase bg-slate-900 border border-slate-700 px-2 py-0.5 rounded self-start">Canvas Layout</span>
                         <div className="self-center my-auto">
@@ -743,12 +778,12 @@ export default function App() {
                         </div>
                         <div className="p-3 bg-slate-900/60 rounded-xl text-xs space-y-0.5">
                           <span className="text-[9px] font-mono uppercase text-cyan-400 block font-bold">Concept Psychology</span>
-                          <p className="text-slate-302 font-sans">{t.psychology}</p>
+                          <p className="text-slate-300 font-sans">{t.psychology}</p>
                         </div>
                         <div className="flex gap-1.5 items-center">
                           <span className="text-[9px] font-mono text-slate-500">Colors:</span>
                           {t.colorPalette?.map((c: string, cIdx: number) => (
-                            <span key={cIdx} className="text-[9px] font-mono px-2 py-0.5 rounded bg-slate-900 border border-slate-850 text-indigo-300">
+                            <span key={cIdx} className="text-[9px] font-mono px-2 py-0.5 rounded bg-slate-900 border border-slate-800 text-indigo-300">
                               {c}
                             </span>
                           ))}
@@ -760,7 +795,7 @@ export default function App() {
 
                 <button
                   onClick={() => setSelectedProject(null)}
-                  className="w-full py-3.5 bg-slate-800 hover:bg-slate-750 text-xs font-bold text-white rounded-xl cursor-pointer"
+                  className="w-full py-3.5 bg-slate-800 hover:bg-slate-700 text-xs font-bold text-white rounded-xl cursor-pointer"
                 >
                   Close Viewer
                 </button>
@@ -772,8 +807,8 @@ export default function App() {
 
         {/* Home Indicator swipe mock line on desktop frame wrappers (hidden in true desktop workspace layout mode) */}
         {!isPcMode && (
-          <div className="hidden md:block bg-slate-950 height-5 pb-3 flex justify-center items-end shrink-0 select-none z-50">
-            <div className="w-28 h-1 rounded-full bg-slate-850" />
+          <div className="hidden md:block bg-slate-950 h-5 pb-3 flex justify-center items-end shrink-0 select-none z-50">
+            <div className="w-28 h-1 rounded-full bg-slate-800" />
           </div>
         )}
 

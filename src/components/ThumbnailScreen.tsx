@@ -73,7 +73,7 @@ export default function ThumbnailScreen({ initialTopic = "", onNavigate, onSaveP
   return (
     <div className="h-full flex flex-col bg-slate-950 text-white overflow-y-auto pb-24">
       {/* Search Header bar */}
-      <div className="p-4 bg-slate-905 border-b border-slate-900 flex items-center gap-3">
+      <div className="p-4 bg-slate-900 border-b border-slate-900 flex items-center gap-3">
         <button
           onClick={() => onNavigate(Screen.DASHBOARD)}
           className="p-1.5 rounded-lg hover:bg-slate-900"
@@ -88,7 +88,7 @@ export default function ThumbnailScreen({ initialTopic = "", onNavigate, onSaveP
 
       <div className="p-5 space-y-6">
         {/* Core Inputs Section */}
-        <div className="bg-slate-900/35 border border-slate-850/80 rounded-2xl p-5 space-y-4">
+        <div className="bg-slate-900/35 border border-slate-800/80 rounded-2xl p-5 space-y-4">
           <div className="space-y-1.5">
             <label className="text-[10px] uppercase font-mono tracking-wider text-slate-400">Video Title or Topic</label>
             <textarea
@@ -177,7 +177,7 @@ export default function ThumbnailScreen({ initialTopic = "", onNavigate, onSaveP
                 className="bg-slate-900/50 border border-slate-800/80 rounded-2xl overflow-hidden shadow-md flex flex-col hover:border-slate-700 duration-200"
               >
                 {/* Simulated Thumbnail Canvas Display */}
-                <div className="aspect-video bg-slate-950 border-b border-slate-850/80 p-6 flex flex-col justify-between relative overflow-hidden group">
+                <div className="aspect-video bg-slate-950 border-b border-slate-800/80 p-6 flex flex-col justify-between relative overflow-hidden group">
                   {/* Subtle graphical background flare inside the canvas */}
                   <div className="absolute inset-0 bg-gradient-to-tr from-purple-900/30 to-slate-900" />
                   <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-slate-950 to-transparent opacity-60" />
@@ -248,11 +248,11 @@ export default function ThumbnailScreen({ initialTopic = "", onNavigate, onSaveP
             <Flame className="w-4 h-4 text-red-400" /> High-conversion YouTube Styles
           </h3>
           <div className="grid grid-cols-2 gap-3">
-            <div className="p-3 bg-slate-905 border border-slate-900 hover:border-slate-800 rounded-xl space-y-1">
+            <div className="p-3 bg-slate-900 border border-slate-900 hover:border-slate-800 rounded-xl space-y-1">
               <span className="text-xs font-bold font-sans text-slate-200">The MrBeast Look</span>
               <p className="text-[10px] text-slate-400">Exaggerated face model, hyper-saturated green accents, custom lighting shadows.</p>
             </div>
-            <div className="p-3 bg-slate-905 border border-slate-900 hover:border-slate-800 rounded-xl space-y-1">
+            <div className="p-3 bg-slate-900 border border-slate-900 hover:border-slate-800 rounded-xl space-y-1">
               <span className="text-xs font-bold font-sans text-slate-200">Bento Grid Bento</span>
               <p className="text-[10px] text-slate-400">Clean 2-part grid showing before/after inside physical neon boxes.</p>
             </div>

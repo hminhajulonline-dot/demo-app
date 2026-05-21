@@ -88,7 +88,7 @@ export default function ScriptScreen({ initialTopic = "", onNavigate, onSaveProj
   return (
     <div className="h-full flex flex-col bg-slate-950 text-white overflow-y-auto pb-24">
       {/* Header bar */}
-      <div className="p-4 bg-slate-905 border-b border-slate-900 flex items-center gap-3">
+      <div className="p-4 bg-slate-900 border-b border-slate-900 flex items-center gap-3">
         <button
           onClick={() => onNavigate(Screen.DASHBOARD)}
           className="p-1.5 rounded-lg hover:bg-slate-900"
@@ -103,7 +103,7 @@ export default function ScriptScreen({ initialTopic = "", onNavigate, onSaveProj
 
       <div className="p-5 space-y-6">
         {/* Parameters input grid */}
-        <div className="bg-slate-900/35 border border-slate-850/80 rounded-2xl p-5 space-y-4">
+        <div className="bg-slate-900/35 border border-slate-800/80 rounded-2xl p-5 space-y-4">
           <div className="space-y-1.5">
             <label className="text-[10px] uppercase font-mono tracking-wider text-slate-400">Video Concept Or Topic</label>
             <textarea
@@ -164,7 +164,7 @@ export default function ScriptScreen({ initialTopic = "", onNavigate, onSaveProj
           <button
             onClick={handleGenerate}
             disabled={!topic || loading}
-            className="w-full py-3.5 bg-gradient-to-r from-cyan-600 via-indigo-650 to-indigo-500 disabled:opacity-50 hover:opacity-95 active:scale-[0.98] transition rounded-xl text-xs font-semibold text-white tracking-wide shadow-lg shadow-indigo-600/10 flex items-center justify-center gap-2 cursor-pointer"
+            className="w-full py-3.5 bg-gradient-to-r from-cyan-600 via-indigo-600 to-indigo-500 disabled:opacity-50 hover:opacity-95 active:scale-[0.98] transition rounded-xl text-xs font-semibold text-white tracking-wide shadow-lg shadow-indigo-600/10 flex items-center justify-center gap-2 cursor-pointer"
           >
             <Sparkles className="w-4 h-4 text-cyan-300" />
             Synthesize Story Script
@@ -218,7 +218,7 @@ export default function ScriptScreen({ initialTopic = "", onNavigate, onSaveProj
             </div>
 
             {/* Title and metadata box */}
-            <div className="bg-slate-900 border border-slate-850 rounded-2xl p-4.5 space-y-2">
+            <div className="bg-slate-900 border border-slate-800 rounded-2xl p-4.5 space-y-2">
               <span className="text-[10px] text-cyan-400 font-mono tracking-widest uppercase">VIRAL PRODUCTION TITLE</span>
               <h4 className="text-sm font-extrabold text-white">{script.title}</h4>
             </div>
@@ -239,9 +239,9 @@ export default function ScriptScreen({ initialTopic = "", onNavigate, onSaveProj
               {script.bodySections?.map((sec: any, sIdx: number) => (
                 <div
                   key={sIdx}
-                  className="bg-slate-900/40 border border-slate-900 hover:border-slate-850 rounded-2xl p-4.5 space-y-3.5"
+                  className="bg-slate-900/40 border border-slate-900 hover:border-slate-800 rounded-2xl p-4.5 space-y-3.5"
                 >
-                  <div className="flex justify-between items-center pb-2 border-b border-slate-850/60">
+                  <div className="flex justify-between items-center pb-2 border-b border-slate-800/60">
                     <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-widest">
                       {sec.sectionName}
                     </span>
@@ -255,7 +255,7 @@ export default function ScriptScreen({ initialTopic = "", onNavigate, onSaveProj
                     <span className="text-[9px] font-mono uppercase text-indigo-400 tracking-wider flex items-center gap-1">
                       <Eye className="w-3 h-3" /> Visual Direction / B-Roll
                     </span>
-                    <p className="text-[11px] text-slate-350 leading-normal italic font-sans">
+                    <p className="text-[11px] text-slate-300 leading-normal italic font-sans">
                       {sec.visualCue}
                     </p>
                   </div>
@@ -274,7 +274,7 @@ export default function ScriptScreen({ initialTopic = "", onNavigate, onSaveProj
             </div>
 
             {/* CTA Final highlighting */}
-            <div className="p-4 bg-slate-905 border border-slate-850 rounded-xl space-y-1">
+            <div className="p-4 bg-slate-900 border border-slate-800 rounded-xl space-y-1">
               <span className="text-[9px] font-mono uppercase text-slate-500 tracking-wider">
                 Vocal Outro Call-to-action (CTA)
               </span>

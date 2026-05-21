@@ -64,7 +64,7 @@ export default function PlannerScreen({ tasks, onToggleTask, onAddTask, onNaviga
   return (
     <div className="h-full flex flex-col bg-slate-950 text-white overflow-y-auto pb-24">
       {/* Header bar */}
-      <div className="p-4 bg-slate-905 border-b border-slate-900 flex items-center justify-between">
+      <div className="p-4 bg-slate-900 border-b border-slate-900 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <button
             onClick={() => onNavigate(Screen.DASHBOARD)}
@@ -118,7 +118,7 @@ export default function PlannerScreen({ tasks, onToggleTask, onAddTask, onNaviga
                   className={`flex flex-col items-center justify-between py-2.5 rounded-xl border transition-all duration-150 relative cursor-pointer ${
                     isSelected
                       ? "bg-indigo-600 border-indigo-500 text-white shadow-md shadow-indigo-600/20"
-                      : "bg-slate-905 border-slate-900 text-slate-400 hover:bg-slate-900"
+                      : "bg-slate-900 border-slate-900 text-slate-400 hover:bg-slate-900"
                   }`}
                 >
                   <span className="text-[9px] uppercase font-mono tracking-wide">
@@ -195,7 +195,7 @@ export default function PlannerScreen({ tasks, onToggleTask, onAddTask, onNaviga
             <div className="flex gap-2 pt-2">
               <button
                 type="submit"
-                className="flex-1 py-3 bg-indigo-500 hover:bg-indigo-405 text-xs font-semibold text-white rounded-xl tracking-wide duration-200"
+                className="flex-1 py-3 bg-indigo-500 hover:bg-indigo-400 text-xs font-semibold text-white rounded-xl tracking-wide duration-200"
               >
                 Schedule Task
               </button>
@@ -215,7 +215,7 @@ export default function PlannerScreen({ tasks, onToggleTask, onAddTask, onNaviga
           <h4 className="text-xs uppercase font-mono tracking-widest text-slate-400">Publishing Tasks List</h4>
 
           {filteredTasks.length === 0 ? (
-            <div className="border border-dashed border-slate-900 bg-slate-955/20 rounded-2xl p-7 text-center space-y-3">
+            <div className="border border-dashed border-slate-900 bg-slate-950/20 rounded-2xl p-7 text-center space-y-3">
               <Calendar className="w-8 h-8 text-slate-600 mx-auto" />
               <div className="space-y-1">
                 <p className="text-xs text-slate-400">All columns clear for {activeDay.dayNameFull}!</p>
@@ -228,7 +228,7 @@ export default function PlannerScreen({ tasks, onToggleTask, onAddTask, onNaviga
                 <div
                   key={task.id}
                   className={`p-3.5 bg-slate-900/40 border rounded-xl flex items-center justify-between gap-3.5 duration-150 select-none ${
-                    task.completed ? "border-slate-900/50 opacity-65" : "border-slate-850"
+                    task.completed ? "border-slate-900/50 opacity-65" : "border-slate-800"
                   }`}
                 >
                   <div className="flex items-center gap-3 min-w-0 flex-1">
@@ -248,7 +248,7 @@ export default function PlannerScreen({ tasks, onToggleTask, onAddTask, onNaviga
                         {task.platform} • {task.type}
                       </span>
                       <p
-                        className={`text-xs text-slate-205 leading-snug truncate font-medium ${
+                        className={`text-xs text-slate-200 leading-snug truncate font-medium ${
                           task.completed ? "line-through text-slate-400 font-normal" : ""
                         }`}
                       >

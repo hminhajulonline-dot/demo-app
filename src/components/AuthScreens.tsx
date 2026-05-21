@@ -216,7 +216,7 @@ export default function AuthScreens({ currentSubScreen, onNavigate, onSuccess }:
 
               <button
                 type="submit"
-                className="w-full py-3 mt-2 bg-slate-800 hover:bg-slate-705 border border-slate-700 active:scale-[0.98] transition-all rounded-xl text-xs font-semibold text-white tracking-wide"
+                className="w-full py-3 mt-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 active:scale-[0.98] transition-all rounded-xl text-xs font-semibold text-white tracking-wide"
               >
                 Transmit Reset Link
               </button>

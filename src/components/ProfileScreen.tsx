@@ -51,7 +51,7 @@ export default function ProfileScreen({
   return (
     <div className="h-full flex flex-col bg-slate-950 text-white overflow-y-auto pb-24">
       {/* Header bar */}
-      <div className="p-4 bg-slate-905 border-b border-slate-900 flex items-center justify-between">
+      <div className="p-4 bg-slate-900 border-b border-slate-900 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <button
             onClick={() => onNavigate(Screen.DASHBOARD)}
@@ -68,12 +68,12 @@ export default function ProfileScreen({
 
       <div className="p-5 space-y-6">
         {/* Upper Profile Info banner details */}
-        <div className="bg-slate-900/40 border border-slate-850 p-5 rounded-2xl flex items-center gap-4 relative overflow-hidden">
+        <div className="bg-slate-900/40 border border-slate-800 p-5 rounded-2xl flex items-center gap-4 relative overflow-hidden">
           {/* Subtle logo vector behind avatar */}
           <div className="absolute right-[-10%] bottom-[-10%] w-24 h-24 bg-indigo-500/5 rounded-full blur-2xl pointer-events-none" />
 
           {/* Glowing Avatar circle */}
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-indigo-500 to-cyan-400 flex items-center justify-center p-0.5 shadow-lg shadow-indigo-550/15">
+          <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-indigo-500 to-cyan-400 flex items-center justify-center p-0.5 shadow-lg shadow-indigo-500/15">
             <div className="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center text-md font-bold text-white uppercase font-mono">
               {username.slice(0, 2)}
             </div>
@@ -111,7 +111,7 @@ export default function ProfileScreen({
         </div>
 
         {/* Region & Location Restriction Preferences */}
-        <div className="bg-slate-900/40 p-5 border border-slate-850 rounded-2xl space-y-4">
+        <div className="bg-slate-900/40 p-5 border border-slate-800 rounded-2xl space-y-4">
           <div className="space-y-1">
             <h4 className="text-xs font-bold text-slate-100 flex items-center gap-1.5">
               <Globe className="w-3.5 h-3.5 text-indigo-400" /> API Geographic Router
@@ -121,7 +121,7 @@ export default function ProfileScreen({
             </p>
           </div>
 
-          <div className="flex items-center justify-between py-1 border-t border-slate-850/60 pt-3">
+          <div className="flex items-center justify-between py-1 border-t border-slate-800/60 pt-3">
             <div className="space-y-0.5">
               <span className="text-xs font-semibold text-slate-200 block">USA Region Restriction</span>
               <span className="text-[10px] text-slate-500 font-sans block">Limit system API pathways to US nodes only</span>
@@ -143,15 +143,15 @@ export default function ProfileScreen({
             </button>
           </div>
 
-          <div className="flex items-center justify-between border-t border-slate-850/40 pt-3 text-xs font-sans">
+          <div className="flex items-center justify-between border-t border-slate-800/40 pt-3 text-xs font-sans">
             <span className="text-slate-300">Target Server Region</span>
-            <span className="text-[10px] font-mono font-semibold text-cyan-400 bg-slate-950 px-2 py-1 rounded border border-slate-850">
+            <span className="text-[10px] font-mono font-semibold text-cyan-400 bg-slate-950 px-2 py-1 rounded border border-slate-800">
               {usaRestriction ? "UNITED STATES (US-EAST)" : "GLOBAL MULTI-REGION (RESTRICTION OFF)"}
             </span>
           </div>
 
-          <div className="text-[10px] text-slate-400 font-sans flex items-center gap-1.5 bg-slate-950/60 p-2.5 rounded-lg border border-slate-850/60 leading-normal">
-            <div className={`w-1.5 h-1.5 rounded-full shrink-0 ${usaRestriction ? 'bg-indigo-455' : 'bg-emerald-400 animate-pulse'}`} />
+          <div className="text-[10px] text-slate-400 font-sans flex items-center gap-1.5 bg-slate-950/60 p-2.5 rounded-lg border border-slate-800/60 leading-normal">
+            <div className={`w-1.5 h-1.5 rounded-full shrink-0 ${usaRestriction ? 'bg-indigo-400' : 'bg-emerald-400 animate-pulse'}`} />
             <span>
               {usaRestriction 
                 ? "API calls are restricted to United States. Some non-US features may buffer." 
@@ -171,7 +171,7 @@ export default function ProfileScreen({
           </div>
 
           {/* Filtering buttons */}
-          <div className="flex gap-1.5 bg-slate-900 p-1 rounded-xl border border-slate-850">
+          <div className="flex gap-1.5 bg-slate-900 p-1 rounded-xl border border-slate-800">
             {([
               { id: "all", label: "All" },
               { id: "caption", label: "Captions" },
@@ -207,7 +207,7 @@ export default function ProfileScreen({
                 <div
                   key={proj.id}
                   onClick={() => onSelectProject(proj)}
-                  className="p-3.5 bg-slate-905/60 border border-slate-900 hover:border-indigo-500/30 rounded-2xl flex items-center justify-between gap-4 duration-150 cursor-pointer"
+                  className="p-3.5 bg-slate-900/60 border border-slate-900 hover:border-indigo-500/30 rounded-2xl flex items-center justify-between gap-4 duration-150 cursor-pointer"
                 >
                   <div className="space-y-1 min-w-0 flex-1">
                     <div className="flex items-center gap-1.5">
@@ -218,7 +218,7 @@ export default function ProfileScreen({
                         {proj.type}
                       </span>
                     </div>
-                    <h5 className="text-xs font-bold text-slate-205 truncate">{proj.title}</h5>
+                    <h5 className="text-xs font-bold text-slate-200 truncate">{proj.title}</h5>
                     <p className="text-[9px] text-slate-500 font-mono truncate">Created {proj.date}</p>
                   </div>
 
@@ -229,7 +229,7 @@ export default function ProfileScreen({
                         e.stopPropagation();
                         onDeleteProject(proj.id);
                       }}
-                      className="p-2.5 rounded-xl bg-slate-950/60 hover:bg-red-950/40 border border-slate-850 hover:border-red-500/20 text-slate-500 hover:text-red-400 duration-150 cursor-pointer"
+                      className="p-2.5 rounded-xl bg-slate-950/60 hover:bg-red-950/40 border border-slate-800 hover:border-red-500/20 text-slate-500 hover:text-red-400 duration-150 cursor-pointer"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>

@@ -91,7 +91,7 @@ export default function OnboardingScreen({ onComplete }: OnboardingScreenProps) 
             </div>
 
             {/* Badge Indicator */}
-            <div className="px-3 py-1 bg-slate-905 border border-slate-800 rounded-full text-[10px] uppercase font-mono tracking-widest text-indigo-300 flex items-center gap-1.5 shadow-inner">
+            <div className="px-3 py-1 bg-slate-900 border border-slate-800 rounded-full text-[10px] uppercase font-mono tracking-widest text-indigo-300 flex items-center gap-1.5 shadow-inner">
               <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
               {slides[slide].badge}
             </div>

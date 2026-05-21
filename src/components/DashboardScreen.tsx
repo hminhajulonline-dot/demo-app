@@ -64,7 +64,7 @@ export default function DashboardScreen({
           </div>
           <button
             onClick={() => onNavigate(Screen.NOTIFICATIONS)}
-            className="w-8 h-8 rounded-xl bg-slate-900 border border-slate-800/85 flex items-center justify-center relative cursor-pointer hover:bg-slate-850"
+            className="w-8 h-8 rounded-xl bg-slate-900 border border-slate-800/85 flex items-center justify-center relative cursor-pointer hover:bg-slate-800"
           >
             <Compass className="w-4 h-4 text-slate-300" />
             <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-cyan-400" />
@@ -90,7 +90,7 @@ export default function DashboardScreen({
           {/* Calendar Streak Card */}
           <div
             onClick={() => onNavigate(Screen.PLANNER)}
-            className="bg-slate-905/30 border border-slate-900 rounded-2xl p-4 space-y-3 shadow-sm hover:border-slate-800 cursor-pointer"
+            className="bg-slate-900/30 border border-slate-900 rounded-2xl p-4 space-y-3 shadow-sm hover:border-slate-800 cursor-pointer"
           >
             <div className="flex justify-between items-center">
               <span className="text-[10px] font-mono tracking-wider uppercase text-slate-400">Consistency Plan</span>
@@ -108,7 +108,7 @@ export default function DashboardScreen({
           {/* Pending Tasks Meter Card */}
           <div
             onClick={() => onNavigate(Screen.PLANNER)}
-            className="bg-slate-905/30 border border-slate-900 rounded-2xl p-4 space-y-3 shadow-sm hover:border-slate-800 cursor-pointer"
+            className="bg-slate-900/30 border border-slate-900 rounded-2xl p-4 space-y-3 shadow-sm hover:border-slate-800 cursor-pointer"
           >
             <div className="flex justify-between items-center">
               <span className="text-[10px] font-mono tracking-wider uppercase text-slate-400">Content Schedule</span>
@@ -142,7 +142,7 @@ export default function DashboardScreen({
               <div className="w-9 h-9 rounded-lg bg-indigo-500/10 flex items-center justify-center">
                 <FileText className="w-4 h-4 text-indigo-400" />
               </div>
-              <span className="text-[11px] font-semibold text-slate-250">Caption Copy</span>
+              <span className="text-[11px] font-semibold text-slate-200">Caption Copy</span>
             </button>
 
             <button
@@ -152,7 +152,7 @@ export default function DashboardScreen({
               <div className="w-9 h-9 rounded-lg bg-cyan-400/10 flex items-center justify-center">
                 <Film className="w-4 h-4 text-cyan-400" />
               </div>
-              <span className="text-[11px] font-semibold text-slate-250">Script AI</span>
+              <span className="text-[11px] font-semibold text-slate-200">Script AI</span>
             </button>
 
             <button
@@ -162,7 +162,7 @@ export default function DashboardScreen({
               <div className="w-9 h-9 rounded-lg bg-purple-500/10 flex items-center justify-center">
                 <Sparkles className="w-4 h-4 text-purple-400" />
               </div>
-              <span className="text-[11px] font-semibold text-slate-250">Thumb Director</span>
+              <span className="text-[11px] font-semibold text-slate-200">Thumb Director</span>
             </button>
           </div>
         </div>
@@ -181,7 +181,7 @@ export default function DashboardScreen({
               <div
                 key={trend.id}
                 onClick={() => onSelectTrend(trend.title, trend.category)}
-                className="group relative flex justify-between items-center p-3 bg-slate-900/45 hover:bg-slate-900 border border-slate-850 hover:border-slate-800 rounded-xl duration-150 cursor-pointer"
+                className="group relative flex justify-between items-center p-3 bg-slate-900/45 hover:bg-slate-900 border border-slate-800 hover:border-slate-800 rounded-xl duration-150 cursor-pointer"
               >
                 <div className="space-y-1 pr-6">
                   <div className="flex items-center gap-2">
@@ -231,7 +231,7 @@ export default function DashboardScreen({
                 <div
                   key={proj.id}
                   onClick={() => onSelectProject(proj)}
-                  className="p-3.5 bg-slate-905/50 border border-slate-900 hover:border-slate-800 hover:bg-slate-900 rounded-xl flex items-center justify-between gap-4 cursor-pointer"
+                  className="p-3.5 bg-slate-900/50 border border-slate-900 hover:border-slate-800 hover:bg-slate-900 rounded-xl flex items-center justify-between gap-4 cursor-pointer"
                 >
                   <div className="space-y-1 min-w-0 flex-1">
                     <div className="flex items-center gap-1.5">
@@ -255,7 +255,7 @@ export default function DashboardScreen({
                   <div className="flex items-center gap-2">
                     <button
                       onClick={(e) => onToggleFavorite(proj.id, e)}
-                      className="p-2 rounded-lg bg-slate-950/60 border border-slate-850 hover:bg-slate-850 text-slate-400 hover:text-yellow-400 duration-200"
+                      className="p-2 rounded-lg bg-slate-950/60 border border-slate-800 hover:bg-slate-800 text-slate-400 hover:text-yellow-400 duration-200"
                     >
                       <Bookmark
                         className={`w-3.5 h-3.5 ${proj.isFavorite ? "fill-current text-yellow-400" : ""}`}
