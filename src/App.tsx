@@ -35,7 +35,12 @@ import {
   Check,
   X,
   Copy,
-  FolderOpen
+  FolderOpen,
+  Monitor,
+  Smartphone,
+  LogOut,
+  FileText,
+  Film
 } from "lucide-react";
 
 export default function App() {
@@ -43,6 +48,18 @@ export default function App() {
   const [currentScreen, setCurrentScreen] = useState<Screen>(Screen.ONBOARDING);
   const [lastScreen, setLastScreen] = useState<Screen>(Screen.DASHBOARD);
   const [activeTab, setActiveTab] = useState<"home" | "planner" | "analytics" | "profile">("home");
+  const [isPcMode, setIsPcMode] = useState<boolean>(() => {
+    const saved = localStorage.getItem("cf_isPcMode");
+    return saved !== null ? saved === "true" : true;
+  });
+
+  const handleTogglePcMode = () => {
+    setIsPcMode((prev) => {
+      const nextVal = !prev;
+      localStorage.setItem("cf_isPcMode", nextVal.toString());
+      return nextVal;
+    });
+  };
 
   // 2. Authentication states
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -227,30 +244,227 @@ export default function App() {
   };
 
   return (
-    <div className="h-full bg-slate-950 flex items-center justify-center p-0 md:p-6 overflow-hidden relative">
+    <div className="h-full bg-slate-950 flex items-center justify-center p-0 md:p-6 overflow-hidden relative w-full">
       {/* Absolute Decorative ambient back spheres */}
       <div className="absolute top-10 left-10 w-96 h-96 bg-purple-600/10 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-indigo-600/10 rounded-full blur-[140px] pointer-events-none" />
 
-      {/* Floating device wrapper mock frame on tablet/desktop displays */}
-      <div className="w-full h-full md:h-[840px] md:max-w-[410px] md:rounded-[44px] md:border-[10px] md:border-slate-900 bg-slate-950 overflow-hidden shadow-2xl relative flex flex-col transition-all duration-300">
-        
-        {/* Dynamic Island / Time status bar on desktop device screens */}
-        <div className="hidden md:flex bg-slate-950 h-10 px-6 justify-between items-center text-white text-[11px] font-mono select-none z-50 border-b border-slate-900/10 shrink-0">
-          <span className="font-bold">04:27 AM</span>
-          <div className="w-[110px] h-6 rounded-full bg-slate-900 flex items-center justify-center border border-slate-800">
-            <div className="w-2.5 h-2.5 rounded-full bg-indigo-500 animate-pulse mr-1" />
-            <span className="text-[8px] tracking-wider text-slate-400">CreatorFlow.ai</span>
-          </div>
-          <div className="flex items-center gap-1.5 text-slate-400">
-            <Wifi className="w-3.5 h-3.5" />
-            <BatteryMedium className="w-4 h-4 text-slate-400" />
-          </div>
+      {/* Aesthetic PC vs Mobile Switcher at the top corner of the screen */}
+      <div className="absolute top-4 right-4 z-50 hidden md:flex items-center gap-2 bg-slate-900/80 backdrop-blur-md px-3 py-1.5 rounded-2xl border border-slate-800/80 select-none">
+        <span className="text-[10.5px] font-mono font-semibold text-slate-400 uppercase tracking-wide">Device Layout:</span>
+        <div className="flex bg-slate-950 p-0.5 rounded-lg border border-slate-800">
+          <button
+            id="mobile-layout-btn"
+            onClick={() => { if (isPcMode) handleTogglePcMode(); }}
+            className={`px-3 py-1 text-[9px] font-bold rounded-md cursor-pointer transition-all duration-250 ${
+              !isPcMode 
+                ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/20" 
+                : "text-slate-400 hover:text-white"
+            }`}
+          >
+            📱 Mobile Frame
+          </button>
+          <button
+            id="pc-layout-btn"
+            onClick={() => { if (!isPcMode) handleTogglePcMode(); }}
+            className={`px-3 py-1 text-[9px] font-bold rounded-md cursor-pointer transition-all duration-250 ${
+              isPcMode 
+                ? "bg-indigo-600 text-white shadow-md shadow-indigo-600/20" 
+                : "text-slate-400 hover:text-white"
+            }`}
+          >
+            💻 PC Desktop
+          </button>
         </div>
+      </div>
+
+      {/* Floating device/workstation wrapper frame */}
+      <div className={`w-full h-full bg-slate-950 overflow-hidden shadow-2xl relative flex transition-all duration-300 ${
+        isPcMode 
+          ? "md:h-[90vh] md:max-w-6xl md:rounded-3xl md:border-4 md:border-slate-900 flex-row" 
+          : "md:h-[840px] md:max-w-[410px] md:rounded-[44px] md:border-[10px] md:border-slate-900 flex-col"
+      }`}>
+        
+        {/* PC Mode Desktop Left Sidebar */}
+        {isLoggedIn && isPcMode && (
+          <div className="hidden md:flex flex-col w-64 border-r border-slate-900/80 bg-slate-950 p-5 shrink-0 select-none justify-between z-40">
+            <div className="space-y-6">
+              {/* Sidebar Brand header */}
+              <div className="flex items-center gap-2.5 px-1 pb-4 border-b border-slate-900">
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-indigo-500 to-cyan-400 flex items-center justify-center">
+                  <Zap className="w-4 h-4 text-white" />
+                </div>
+                <div>
+                  <span className="font-extrabold tracking-tight text-sm text-white block">CreatorFlow AI</span>
+                  <span className="text-[10px] text-indigo-400 font-mono tracking-widest uppercase">PC WORKSTATION</span>
+                </div>
+              </div>
+
+              {/* Personal Workspace Info */}
+              <div className="px-3 py-2.5 bg-slate-900/40 border border-slate-900/70 rounded-xl space-y-1">
+                <span className="text-[9px] uppercase font-mono text-slate-500 block">Workspace</span>
+                <span className="text-xs font-bold text-slate-200 block truncate">{userEmail || "Guest User"}</span>
+                <div className="flex items-center gap-1.5 pt-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="text-[8.5px] font-mono text-slate-400">Cloud Sync Active</span>
+                </div>
+              </div>
+
+              {/* Sidebar Navigation items */}
+              <div className="space-y-1">
+                <span className="px-2 pb-1.5 text-[8.5px] uppercase font-mono tracking-wider font-bold text-slate-550 block">NAVIGATION</span>
+                
+                <button
+                  id="tab-btn-home"
+                  onClick={() => {
+                    navigateToScreen(Screen.DASHBOARD);
+                    setActiveTab("home");
+                  }}
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all cursor-pointer text-left ${
+                    activeTab === "home" 
+                      ? "bg-indigo-600/10 border border-indigo-500/20 text-indigo-400 font-semibold" 
+                      : "border border-transparent text-slate-400 hover:text-white hover:bg-slate-900/60"
+                  }`}
+                >
+                  <Home className="w-4 h-4 shrink-0" />
+                  <span className="text-xs">Dashboard Hub</span>
+                </button>
+
+                <button
+                  id="tab-btn-planner"
+                  onClick={() => {
+                    navigateToScreen(Screen.PLANNER);
+                    setActiveTab("planner");
+                  }}
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all cursor-pointer text-left ${
+                    activeTab === "planner" 
+                      ? "bg-indigo-600/10 border border-indigo-500/20 text-indigo-400 font-semibold" 
+                      : "border border-transparent text-slate-400 hover:text-white hover:bg-slate-900/60"
+                  }`}
+                >
+                  <Calendar className="w-4 h-4 shrink-0" />
+                  <span className="text-xs">Schedule Planner</span>
+                </button>
+
+                <button
+                  id="tab-btn-analytics"
+                  onClick={() => {
+                    navigateToScreen(Screen.ANALYTICS);
+                    setActiveTab("analytics");
+                  }}
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all cursor-pointer text-left ${
+                    activeTab === "analytics" 
+                      ? "bg-indigo-600/10 border border-indigo-500/20 text-indigo-400 font-semibold" 
+                      : "border border-transparent text-slate-400 hover:text-white hover:bg-slate-900/60"
+                  }`}
+                >
+                  <LineChart className="w-4 h-4 shrink-0" />
+                  <span className="text-xs">Retention Insights</span>
+                </button>
+
+                <button
+                  id="tab-btn-profile"
+                  onClick={() => {
+                    navigateToScreen(Screen.PROFILE);
+                    setActiveTab("profile");
+                  }}
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all cursor-pointer text-left ${
+                    activeTab === "profile" 
+                      ? "bg-indigo-600/10 border border-indigo-500/20 text-indigo-400 font-semibold" 
+                      : "border border-transparent text-slate-400 hover:text-white hover:bg-slate-900/60"
+                  }`}
+                >
+                  <User className="w-4 h-4 shrink-0" />
+                  <span className="text-xs font-sans">Locker & Prefs</span>
+                </button>
+              </div>
+
+              {/* PC Quick AI Tools Panel */}
+              <div className="space-y-2 pt-2">
+                <span className="px-2 text-[8.5px] uppercase font-mono tracking-wider font-bold text-slate-550 block">DIRECT TOOLS</span>
+                <div className="grid grid-cols-2 gap-1.5 px-1">
+                  <button
+                    id="tool-caption-btn"
+                    onClick={() => navigateToScreen(Screen.CAPTION_GEN)}
+                    className="p-2 rounded-lg bg-slate-900/80 border border-slate-850 hover:border-indigo-500 hover:text-white transition-all text-[9.5px] font-semibold text-slate-300 text-center cursor-pointer"
+                  >
+                    Captions
+                  </button>
+                  <button
+                    id="tool-script-btn"
+                    onClick={() => navigateToScreen(Screen.SCRIPT_GEN)}
+                    className="p-2 rounded-lg bg-slate-900/80 border border-slate-850 hover:border-cyan-500 hover:text-white transition-all text-[9.5px] font-semibold text-slate-300 text-center cursor-pointer"
+                  >
+                    Scripts
+                  </button>
+                  <button
+                    id="tool-thumb-btn"
+                    onClick={() => navigateToScreen(Screen.THUMBNAIL_GEN)}
+                    className="p-2 rounded-lg bg-slate-900/80 border border-slate-850 hover:border-purple-500 hover:text-white transition-all text-[9.5px] font-semibold text-slate-300 text-center cursor-pointer"
+                  >
+                    Thumbs
+                  </button>
+                  <button
+                    id="tool-premium-btn"
+                    onClick={() => navigateToScreen(Screen.PREMIUM)}
+                    className="p-2 rounded-lg bg-slate-900/80 border border-slate-850 hover:border-amber-500 hover:text-white transition-all text-[9.5px] font-mono font-bold text-amber-400 text-center cursor-pointer flex items-center justify-center gap-1"
+                  >
+                    <Zap className="w-2.5 h-2.5 animate-pulse text-amber-450" /> PRO
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom controls inside the PC sidebar */}
+            <div className="space-y-3">
+              <button
+                id="sidebar-signout-btn"
+                onClick={handleSignOut}
+                className="w-full flex items-center justify-center gap-2 py-2.5 border border-slate-900 hover:border-rose-950 hover:bg-rose-500/5 hover:text-rose-450 rounded-xl text-xs text-slate-400 transition cursor-pointer"
+              >
+                <LogOut className="w-3.5 h-3.5" /> Sign Out
+              </button>
+              
+              {/* Mini brand note */}
+              <div className="flex items-center justify-between text-[9px] font-mono text-slate-600 px-1 pt-1 border-t border-slate-900/60">
+                <span>v2.1.0-DESKTOP</span>
+                <span>ONLINE Mode</span>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Viewport Render core structure */}
-        <div className="flex-1 overflow-hidden relative flex flex-col">
+        <div className="flex-1 overflow-hidden relative flex flex-col h-full bg-slate-950">
           
+          {/* Title bar on desktop displays */}
+          {!isPcMode ? (
+            <div className="hidden md:flex bg-slate-950 h-10 px-6 justify-between items-center text-white text-[11px] font-mono select-none z-50 border-b border-slate-900/10 shrink-0">
+              <span className="font-bold">04:27 AM</span>
+              <div className="w-[110px] h-6 rounded-full bg-slate-900 flex items-center justify-center border border-slate-800">
+                <div className="w-2.5 h-2.5 rounded-full bg-indigo-500 animate-pulse mr-1" />
+                <span className="text-[8px] tracking-wider text-slate-400">CreatorFlow.ai</span>
+              </div>
+              <div className="flex items-center gap-1.5 text-slate-400">
+                <Wifi className="w-3.5 h-3.5" />
+                <BatteryMedium className="w-4 h-4 text-slate-400" />
+              </div>
+            </div>
+          ) : (
+            <div className="hidden md:flex bg-slate-950 h-10 px-6 justify-between items-center text-white text-[10px] font-mono select-none z-50 border-b border-slate-900/60 shrink-0">
+              <div className="flex items-center gap-1.5 select-none">
+                <div className="w-2 h-2 rounded-full bg-rose-500/80 hover:bg-rose-500 transition-all cursor-pointer" />
+                <div className="w-2 h-2 rounded-full bg-amber-500/80 hover:bg-amber-500 transition-all cursor-pointer" />
+                <div className="w-2 h-2 rounded-full bg-emerald-500/80 hover:bg-emerald-500 transition-all cursor-pointer" />
+              </div>
+              <span className="text-slate-400 font-semibold font-sans tracking-wide">CREATORFLOW PC DESKTOP WORKSPACE SUITE</span>
+              <div className="flex items-center gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="text-slate-500 font-sans text-[9px] uppercase tracking-wider">Cloud Engine Up</span>
+              </div>
+            </div>
+          )}
+
           {/* Main Routing Render Matrix */}
           <div className="flex-1 overflow-hidden relative">
             {currentScreen === Screen.ONBOARDING && (
@@ -341,9 +555,11 @@ export default function App() {
             )}
           </div>
 
-          {/* Core bottom navigation rail (visible only when logged in) */}
+          {/* Core bottom navigation rail (visible only when logged in and not in PC Mode on wide screens) */}
           {isLoggedIn && (
-            <div className="absolute bottom-0 inset-x-0 h-[72px] bg-slate-950/85 backdrop-blur-xl border-t border-slate-900 flex items-center justify-around px-3 z-40 select-none">
+            <div className={`absolute bottom-0 inset-x-0 h-[72px] bg-slate-950/85 backdrop-blur-xl border-t border-slate-900 flex items-center justify-around px-3 z-40 select-none ${
+              isPcMode ? "md:hidden" : ""
+            }`}>
               
               <button
                 onClick={() => navigateToScreen(Screen.DASHBOARD)}
@@ -554,10 +770,12 @@ export default function App() {
 
         </div>
 
-        {/* Home Indicator swipe mock line on desktop frame wrappers */}
-        <div className="hidden md:block bg-slate-950 height-5 pb-3 flex justify-center items-end shrink-0 select-none z-50">
-          <div className="w-28 h-1 rounded-full bg-slate-850" />
-        </div>
+        {/* Home Indicator swipe mock line on desktop frame wrappers (hidden in true desktop workspace layout mode) */}
+        {!isPcMode && (
+          <div className="hidden md:block bg-slate-950 height-5 pb-3 flex justify-center items-end shrink-0 select-none z-50">
+            <div className="w-28 h-1 rounded-full bg-slate-850" />
+          </div>
+        )}
 
       </div>
     </div>
